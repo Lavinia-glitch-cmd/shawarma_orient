@@ -4,11 +4,20 @@ using namespace std;
 class ingredients
 {
     private:
-
+        char* chosen_ingr[30]; //maximum 30 ingredients 
+        int ingr_number;
 
     public:
         void open_menu();
+        ingredients();
+        ~ingredients();
 };
+ingredients::ingredients()
+{
+    ingr_number=0;
+    for (int i=0;i<30;++i)
+        chosen_ingr[i]=nullptr;
+}
 void ingredients::open_menu()
 {
     int suboption=-1;
