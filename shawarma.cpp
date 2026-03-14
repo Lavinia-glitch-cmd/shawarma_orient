@@ -7,6 +7,7 @@ class ingredients
     private:
         char* chosen_ingr[20]; //maximum 20 ingredients 
         int ingr_number;
+        double price[20];
 
     public:
         void open_menu();
