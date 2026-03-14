@@ -17,6 +17,10 @@ class ingredients
         ingredients();
         ingredients(double);
         ~ingredients();
+
+        double gettotal() const {
+            return cost;
+        }
 };
 ingredients::ingredients(double budget)
 {
