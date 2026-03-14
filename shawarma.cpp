@@ -7,49 +7,61 @@ class ingredients
     private:
         char* chosen_ingr[20]; 
         int ingr_number;
-        double price[20], cost;
+        float price[20], cost, budget;
+        const float initial_budg;
 
     public:
         void open_menu();
-        void add_ingr_in_list(const char*, double);
+        void add_ingr_in_list(const char*, float);
         void show_ingr();
 
         ingredients();
-        ingredients(double);
+        ingredients(float);
+        ingredients(float, float);
         ~ingredients();
 
         double gettotal() const {
             return cost;
         }
 };
-ingredients::ingredients(double budget)
+ingredients::ingredients(float b) : initial_budg(b)
 {
-    cost=budget;
-    ingr_number=0;
-    for(int i=0; i< 20;i++)
-        chosen_ingr[i]=nullptr;
+    budget=b;
 }
+// ingredients::ingredients(float budget, float price)
+// {   
+//     budget-=price;
+    
+
+// }
 ingredients::~ingredients()
 {
     for (int i=0; i<ingr_number; i++)
         delete[] chosen_ingr[i];
 }
-ingredients::ingredients()
+ingredients::ingredients() : cost(0), initial_budg(0)
 {
     ingr_number=0;
     for (int i=0;i<20;++i)
         chosen_ingr[i]=nullptr;
 }
-void ingredients::add_ingr_in_list(const char *name, double price)
+void ingredients::add_ingr_in_list(const char *name, float price)
 {
     if(ingr_number>20)
         std::cout<<"too many ingredients";
+    else 
+        if (cost+price > initial_budg)
+            {
+                std::cout<<"over budget!\n";
+            std::cout<<"you have "<<budget<<" left";
+            }
     else
     {
         chosen_ingr[ingr_number]=new char[strlen(name)+1];
         strcpy(chosen_ingr[ingr_number], name);
         this->price[ingr_number]=price;
         cost+=price;
+        budget-=price;
         ingr_number++;
 
         
@@ -114,7 +126,10 @@ void ingredients::open_menu()
 int main()
 {
     int option;
-    ingredients my_ingredients;
+    float budget;
+    std::cout<<"set you initial budgt: ";
+    std::cin>>budget;
+    ingredients my_ingredients(budget);
     do
     {
     std::cout<<"\n== choose from the following ==\n";
