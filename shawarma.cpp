@@ -1,11 +1,11 @@
 #include <iostream>
-#include <string>
+#include <cstring>
 
 
 class ingredients
 {
     private:
-        std::string  chosen_ingr[20]; 
+        char* chosen_ingr[20]; 
         int ingr_number;
         float price[20], cost, budget;
         const float initial_budg;
@@ -30,7 +30,7 @@ class ingredients
 void ingredients::operator+=(const char* ingr)
 {
     float p=0.0;
-    if 
+    if str
 }
 
 // ingredients::ingredients(float budget, float price)
