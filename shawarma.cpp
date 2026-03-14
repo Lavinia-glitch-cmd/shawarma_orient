@@ -5,9 +5,9 @@
 class ingredients
 {
     private:
-        char* chosen_ingr[20]; //maximum 20 ingredients 
+        char* chosen_ingr[20]; 
         int ingr_number;
-        double price[20];
+        double price[20], cost;
 
     public:
         void open_menu();
@@ -15,8 +15,16 @@ class ingredients
         void show_ingr();
 
         ingredients();
+        ingredients(double);
         ~ingredients();
 };
+ingredients::ingredients(double budget)
+{
+    cost=budget;
+    ingr_number=0;
+    for(int i=0; i< 20;i++)
+        chosen_ingr[i]=nullptr;
+}
 ingredients::~ingredients()
 {
     for (int i=0; i<ingr_number; i++)
