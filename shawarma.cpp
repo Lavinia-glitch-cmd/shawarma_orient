@@ -1,6 +1,6 @@
 #include <iostream>
 #include <cstring>
-using namespace std;
+
 
 class ingredients
 {
@@ -25,7 +25,7 @@ ingredients::ingredients()
 void ingredients::add_ingr_in_list(const char *name)
 {
     if(ingr_number>20)
-        cout<<"too many ingredients";
+        std::cout<<"too many ingredients";
     else
     {
         chosen_ingr[ingr_number]=new char[strlen(name)+1];
@@ -36,12 +36,13 @@ void ingredients::add_ingr_in_list(const char *name)
 void ingredients::show_ingr()
 {
     //cout<<"numarul de ingrediente: "<<ingr_number<<"\n";
-    if(ingr_number==0) cout<<"you did not chose any ingredient\n";
+    if(ingr_number==0) 
+        std::cout<<"you did not chose any ingredient\n";
     else 
     {
-        cout<<"\n---your ingredients:\n";
+        std::cout<<"\n---your ingredients:\n";
         for(int i=0;i<ingr_number;i++)
-            cout<<"---"<<chosen_ingr[i]<<"\n";
+            std::cout<<"---"<<chosen_ingr[i]<<"\n";
     }
 }
 void ingredients::open_menu()
@@ -49,13 +50,13 @@ void ingredients::open_menu()
     int suboption=-1;
     while(suboption!=0)
     {
-        cout<<"\n==Choose ingredient==\n";
-        cout<<"1. meat\n";
-        cout<<"2. sauce\n";
-        cout<<"3. tomaotes\n";
-        cout<<"4. french fries\n";
-        cout<<"0. exit\n";
-        cin>>suboption;
+        std::cout<<"\n==Choose ingredient==\n";
+        std::cout<<"1. meat\n";
+        std::cout<<"2. sauce\n";
+        std::cout<<"3. tomaotes\n";
+        std::cout<<"4. french fries\n";
+        std::cout<<"0. exit\n";
+        std::cin>>suboption;
         
         switch(suboption)
         {
@@ -93,12 +94,12 @@ int main()
     ingredients my_ingredients;
     do
     {
-    cout<<"\n== choose from the following ==\n";
-    cout<<"1. add ingredient\n";
-    cout<<"2. show ingredients\n";
-    cout<<"0. exit\n";
+    std::cout<<"\n== choose from the following ==\n";
+    std::cout<<"1. add ingredient\n";
+    std::cout<<"2. show ingredients\n";
+    std::cout<<"0. exit\n";
 
-    cin>>option;
+    std::cin>>option;
     switch(option)
     {
         case 1:
