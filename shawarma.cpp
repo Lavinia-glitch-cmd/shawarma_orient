@@ -30,7 +30,21 @@ class ingredients
 void ingredients::operator+=(const char* ingr)
 {
     float p=0.0;
-    if str
+    std::string name(ingr);
+    if (name == "meat") 
+        p=9.99;
+    else 
+        if (name == "sauce") 
+            p = 3.99;
+        else 
+            if (name == "tomatoes") 
+                p = 4.99;
+    
+            else 
+                if (name == "french fries") 
+                    p = 5.99;
+    add_ingr_in_list(ingr, p);
+
 }
 
 // ingredients::ingredients(float budget, float price)
@@ -114,16 +128,16 @@ void ingredients::open_menu()
         switch(suboption)
         {
             case 1:
-                add_ingr_in_list("meat", 9.99);
+                this->operator+=("meat");
                 break;
             case 2:
-                add_ingr_in_list("sauce", 3.99);
+                this->operator+=("sauce");
                 break;
             case 3:
-                add_ingr_in_list("tomatoes", 4.99);
+                this->operator+=("tomatoes");
                 break;
             case 4:
-                add_ingr_in_list("french fries", 5.99);
+                this->operator+=("french fries");
                 break;
         }
     }
