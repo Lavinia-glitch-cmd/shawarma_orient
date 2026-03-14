@@ -11,7 +11,7 @@ class ingredients
 
     public:
         void open_menu();
-        void add_ingr_in_list(const char*);
+        void add_ingr_in_list(const char*, double);
         void show_ingr();
 
         ingredients();
@@ -36,7 +36,7 @@ ingredients::ingredients()
     for (int i=0;i<20;++i)
         chosen_ingr[i]=nullptr;
 }
-void ingredients::add_ingr_in_list(const char *name)
+void ingredients::add_ingr_in_list(const char *name, double price)
 {
     if(ingr_number>20)
         std::cout<<"too many ingredients";
@@ -44,7 +44,11 @@ void ingredients::add_ingr_in_list(const char *name)
     {
         chosen_ingr[ingr_number]=new char[strlen(name)+1];
         strcpy(chosen_ingr[ingr_number], name);
+        this->price[ingr_number]=price;
+        cost+=price;
         ingr_number++;
+
+        
     }
 }
 void ingredients::show_ingr()
@@ -57,6 +61,7 @@ void ingredients::show_ingr()
         std::cout<<"\n---your ingredients:\n";
         for(int i=0;i<ingr_number;i++)
             std::cout<<"---"<<chosen_ingr[i]<<"\n";
+        
     }
 }
 void ingredients::open_menu()
@@ -65,26 +70,26 @@ void ingredients::open_menu()
     while(suboption!=0)
     {
         std::cout<<"\n==Choose ingredient==\n";
-        std::cout<<"1. meat\n";
-        std::cout<<"2. sauce\n";
-        std::cout<<"3. tomaotes\n";
-        std::cout<<"4. french fries\n";
+        std::cout<<"1. meat ---------9.99 ron\n";
+        std::cout<<"2. sauce---------3.99 ron\n";
+        std::cout<<"3. tomaotes------4.99 ron\n";
+        std::cout<<"4. french fries--5.99 ron\n";
         std::cout<<"0. exit\n";
         std::cin>>suboption;
         
         switch(suboption)
         {
             case 1:
-                add_ingr_in_list("meat");
+                add_ingr_in_list("meat", 9.99);
                 break;
             case 2:
-                add_ingr_in_list("sauce");
+                add_ingr_in_list("sauce", 3.99);
                 break;
             case 3:
-                add_ingr_in_list("tomatoes");
+                add_ingr_in_list("tomatoes", 4.99);
                 break;
             case 4:
-                add_ingr_in_list("french fries");
+                add_ingr_in_list("french fries", 5.99);
                 break;
         }
     }
