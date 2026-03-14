@@ -14,8 +14,13 @@ class ingredients
         void show_ingr();
 
         ingredients();
-       // ~ingredients();
+        ~ingredients();
 };
+ingredients::~ingredients()
+{
+    for (int i=0; i<ingr_number; i++)
+        delete[] chosen_ingr[i];
+}
 ingredients::ingredients()
 {
     ingr_number=0;
