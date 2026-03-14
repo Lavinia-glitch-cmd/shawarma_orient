@@ -17,17 +17,14 @@ class ingredients
 
         ingredients();
         ingredients(float);
-        ingredients(float, float);
+        //ingredients(float, float);
         ~ingredients();
 
         double gettotal() const {
             return cost;
         }
 };
-ingredients::ingredients(float b) : initial_budg(b)
-{
-    budget=b;
-}
+
 // ingredients::ingredients(float budget, float price)
 // {   
 //     budget-=price;
@@ -44,6 +41,14 @@ ingredients::ingredients() : cost(0), initial_budg(0)
     ingr_number=0;
     for (int i=0;i<20;++i)
         chosen_ingr[i]=nullptr;
+}
+ingredients::ingredients(float b) : initial_budg(b)
+{
+    cost=0;
+    ingr_number=0;
+    for(int i = 0; i < 20; ++i)
+        chosen_ingr[i] = nullptr;
+    budget=b;
 }
 void ingredients::add_ingr_in_list(const char *name, float price)
 {
@@ -69,14 +74,19 @@ void ingredients::add_ingr_in_list(const char *name, float price)
 }
 void ingredients::show_ingr()
 {
-    //cout<<"numarul de ingrediente: "<<ingr_number<<"\n";
     if(ingr_number==0) 
-        std::cout<<"you did not chose any ingredient\n";
+        std::cout<<"you did not chose any ingredient \n";
     else 
     {
         std::cout<<"\n---your ingredients:\n";
         for(int i=0;i<ingr_number;i++)
-            std::cout<<"---"<<chosen_ingr[i]<<"\n";
+            std::cout<<"---"<<chosen_ingr[i]<<"----"<<price[i]<<"ron"<<"\n";
+        
+        std::cout<<"\n-----------------\n";
+        std::cout<<"--- Total items: "<<ingr_number<<"---\n";
+        std::cout<<"--- Grand total: ---"<<cost<<"ron---\n";
+        std::cout<<"--- Remaining budget: ---"<<budget<<"ron---\n";
+      
         
     }
 }
