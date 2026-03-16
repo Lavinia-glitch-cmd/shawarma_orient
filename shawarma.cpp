@@ -17,7 +17,8 @@ class ingredients
         void show_ingr();
 
         ingredients();
-        ingredients(float);
+        explicit ingredients(float);
+
         //ingredients(float, float);
         ~ingredients();
 
@@ -65,7 +66,7 @@ ingredients::ingredients() : cost(0), initial_budg(0)
     for (int i=0;i<20;++i)
         chosen_ingr[i]=nullptr;
 }
-ingredients::ingredients(float b) : initial_budg(b)
+explicit ingredients::ingredients(float b) : initial_budg(b)
 {
     cost=0;
     ingr_number=0;
