@@ -226,6 +226,15 @@ class client
         {
             age=v;
         }
+        void setname(const char* n)
+        {
+            if(this->name)
+                {
+                    delete[] name;
+                }
+            this->name=new char[strlen(n)+1];
+            strcpy(this->name, n);
+        }
 
 };
 
