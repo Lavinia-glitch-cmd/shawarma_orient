@@ -236,7 +236,16 @@ class client
             strcpy(this->name, n);
         }
 
+        std::ostream& afisare_client(std::ostream& out) const;
 };
+std::ostream& client::afisare_client(std::ostream& out) const{
+    out<<"client name: "<<name<<"----age: "<<age;
+    return out;
+}
+std::ostream& operator<<(std::ostream& out, const client& obj)
+{
+    return obj.afisare_client(out);
+}
 
 client& client::operator=(const client & obj)
 {
