@@ -15,7 +15,7 @@ class ingredients
         void open_menu();
         void add_ingr_in_list(const char*, float);
         void show_ingr();
-
+        void operator+=(const char*);
         ingredients();
         explicit ingredients(float);
         ingredients(const ingredients& obj);
@@ -23,8 +23,6 @@ class ingredients
 
         //ingredients(float, float);
         ~ingredients();
-
-        void operator+=(const char*);
 
         double gettotal() const {
             return cost;
@@ -95,12 +93,9 @@ void ingredients::operator+=(const char* ingr)
     add_ingr_in_list(ingr, p);
 
 }
-
 // ingredients::ingredients(float budget, float price)
 // {   
 //     budget-=price;
-    
-
 // }
 ingredients::~ingredients()
 {
@@ -203,6 +198,27 @@ void ingredients::open_menu()
     }*/
 }
 
+
+class client
+{
+    private:
+        char* name;
+        int age;
+        //double bonus;
+        static int no_clients;
+
+    public:
+        explicit client( const char* name="Not known", int v=0);
+
+        
+
+};
+explicit client::client(const char* name, int v): age(v)
+{
+    this->name= new char[strlen(name)+1];
+    strcpy(this->name, name);
+    no_clients++;
+}
 int main()
 {
     int option;
@@ -210,11 +226,14 @@ int main()
     std::cout<<"set you initial budgt: ";
     std::cin>>budget;
     ingredients my_ingredients(budget);
+
+    client utilizator;
     do
     {
     std::cout<<"\n== choose from the following ==\n";
     std::cout<<"1. add ingredient\n";
     std::cout<<"2. show ingredients\n";
+    std::cout<<"3. introduce yourself\n";
     std::cout<<"0. exit\n";
 
     std::cin>>option;
@@ -225,6 +244,10 @@ int main()
             break;
         case 2:
             my_ingredients.show_ingr();
+            break;
+        case 3:
+            std::cin>>utilizator;
+            std::cout<<"Hello, "<<utilizator.getname() <<"!\n";
             break;
     }
     }while(option!=0);
