@@ -211,14 +211,19 @@ class client
         explicit client( const char* name="Not known", int v=0);
 
         client(const client& obj);
+        ~client();
 
 };
+client::~client()
+{
+    delete[] name;
+}
 client::client(const client& obj)
 {
     this->name= new char[strlen(obj.name) +1];
     this->age=obj.age;
     strcpy(this->name, name);
-    
+
 }
 explicit client::client(const char* name, int v): age(v)
 {
