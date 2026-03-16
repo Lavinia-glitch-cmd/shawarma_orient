@@ -212,8 +212,21 @@ class client
 
         client(const client& obj);
         ~client();
+        client& operator=(const client& obj);
 
 };
+client& client::operator=(const client & obj)
+{
+    if (this!= &obj)
+    {
+        delete[] name;
+        this->name=new char[strlen(obj.name)+1];
+        this->age=obj.age;
+        strcpy(this->name, name);
+
+    }
+    return *this;
+}
 client::~client()
 {
     delete[] name;
