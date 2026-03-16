@@ -214,7 +214,21 @@ class client
         ~client();
         client& operator=(const client& obj);
 
+        const char* getname() const 
+        {
+            return name;
+        }
+        int getage() const
+        {
+            return age;
+        }
+        void setage(int v)
+        {
+            age=v;
+        }
+
 };
+
 client& client::operator=(const client & obj)
 {
     if (this!= &obj)
