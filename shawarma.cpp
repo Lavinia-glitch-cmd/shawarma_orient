@@ -9,6 +9,7 @@ class ingredients
         int ingr_number;
         float price[20], cost, budget;
         const float initial_budg;
+        static int sold_ingr;
 
     public:
         void open_menu();
@@ -104,11 +105,10 @@ void ingredients::show_ingr()
         for(int i=0;i<ingr_number;i++)
             std::cout<<"---"<<chosen_ingr[i]<<"----"<<price[i]<<"ron"<<"\n";
         
-        std::cout<<"\n-----------------\n";
-        std::cout<<"--- Total items: "<<ingr_number<<"---\n";
-        std::cout<<"--- Grand total: ---"<<cost<<"ron---\n";
-        std::cout<<"--- Remaining budget: ---"<<budget<<"ron---\n";
-      
+        // std::cout<<"\n-----------------\n";
+        // std::cout<<"--- Total items: "<<ingr_number<<"---\n";
+        // std::cout<<"--- Grand total: ---"<<cost<<"ron---\n";
+        // std::cout<<"--- Remaining budget: ---"<<budget<<"ron---\n";
         
     }
 }
