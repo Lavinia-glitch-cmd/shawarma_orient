@@ -108,7 +108,7 @@ ingredients::ingredients() : cost(0), initial_budg(0)
     for (int i=0;i<20;++i)
         chosen_ingr[i]=nullptr;
 }
-explicit ingredients::ingredients(float b) : initial_budg(b)
+ingredients::ingredients(float b) : initial_budg(b)
 {
     cost=0;
     ingr_number=0;
@@ -237,7 +237,9 @@ class client
         }
 
         std::ostream& afisare_client(std::ostream& out) const;
+        //std::istream& citire_client(std::istream& in, client& obj);
 };
+int client::no_clients=0;
 std::ostream& client::afisare_client(std::ostream& out) const{
     out<<"client name: "<<name<<"----age: "<<age;
     return out;
@@ -246,7 +248,15 @@ std::ostream& operator<<(std::ostream& out, const client& obj)
 {
     return obj.afisare_client(out);
 }
-
+std::istream& operator>>(std::istream& in, client& obj)
+{
+    char buff[256]; int v;
+    in.getline(buff, 256);
+    in >>v;
+    obj.setage(v);
+    obj.setname(buff);
+    return in;
+}
 client& client::operator=(const client & obj)
 {
     if (this!= &obj)
@@ -270,7 +280,7 @@ client::client(const client& obj)
     strcpy(this->name, name);
 
 }
-explicit client::client(const char* name, int v): age(v)
+client::client(const char* name, int v): age(v)
 {
     this->name= new char[strlen(name)+1];
     strcpy(this->name, name);
@@ -304,7 +314,6 @@ int main()
             break;
         case 3:
             std::cin>>utilizator;
-            std::cout<<"Hello, "<<utilizator.getname() <<"!\n";
             break;
     }
     }while(option!=0);
