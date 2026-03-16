@@ -62,6 +62,7 @@ ingredients& ingredients::operator=(const ingredients& obj)
     strcpy(chosen_ingr[i], obj.chosen_ingr[i]);
     price[i] =obj.price[i];}
 
+    return *this;
 }
 ingredients::ingredients(const ingredients& obj):initial_budg(obj.initial_budg)
 {
