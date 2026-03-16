@@ -29,6 +29,14 @@ class ingredients
         double gettotal() const {
             return cost;
         }
+        float getbudget() const 
+        {
+            return budget;
+        }
+        void setbudget(float b)
+        {
+            budget=b;
+        }
 };
 ingredients& ingredients::operator=(const ingredients& obj)
 {
