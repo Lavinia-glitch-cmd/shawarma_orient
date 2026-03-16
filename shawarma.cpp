@@ -207,6 +207,7 @@ class client
         int age;
         //double bonus;
         static int no_clients;
+        ingredients chart;
 
     public:
         explicit client( const char* name="Not known", int v=0);
@@ -236,6 +237,10 @@ class client
             this->name=new char[strlen(n)+1];
             strcpy(this->name, n);
         }
+        ingredients& getchart()
+        {
+            return chart;
+        }
 
         std::ostream& afisare_client(std::ostream& out) const;
         //std::istream& citire_client(std::istream& in, client& obj);
@@ -252,8 +257,12 @@ std::ostream& operator<<(std::ostream& out, const client& obj)
 std::istream& operator>>(std::istream& in, client& obj)
 {
     char buff[256]; int v;
+    in.get();
+    std::cout<<"your name:";
     in.getline(buff, 256);
+    std::cout<<"your age:";
     in >>v;
+    in.ignore(256, '\n');
     obj.setage(v);
     obj.setname(buff);
     return in;
@@ -293,7 +302,7 @@ int main()
     float budget;
     std::cout<<"set you initial budgt: ";
     std::cin>>budget;
-    ingredients my_ingredients(budget);
+    //ingredients my_ingredients(budget);
 
     client utilizator;
     do
@@ -308,12 +317,13 @@ int main()
     switch(option)
     {
         case 1:
-            my_ingredients.open_menu();
+            utilizator.getchart().open_menu();
             break;
         case 2:
-            my_ingredients.show_ingr();
+            utilizator.getchart().show_ingr();
             break;
         case 3:
+            //std::cout<<"introduce yourself: ";
             std::cin>>utilizator;
             break;
     }
