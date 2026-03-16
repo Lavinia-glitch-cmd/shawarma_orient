@@ -37,21 +37,32 @@ class ingredients
         {
             budget=b;
         }
+
+        std::ostream& afisare(std::ostream& out) const;
 };
+std::ostream& operator<<(std::ostream& out, const ingredients& i) {
+    i.afisare(out);
+    return out;
+}
+std::ostream& ingredients::afisare(std::ostream& out) const
+{
+    out<< "Ingredients in the list: "<<ingr_number<<"total cost: "<<cost;
+    return out;
+}
 ingredients& ingredients::operator=(const ingredients& obj)
 {
     if (this== &obj)
         return *this;
     
-        for (int i=0; i<ingr_number;i++)
-            delete[] chosen_ingr[i];
-        this->cost=obj.cost;
-        this->budget=obj.budget;
-        this->ingr_number=obj.ingr_number;
-        for(int i=0;i<=ingr_number;i++)
-        {chosen_ingr[i]=new char[strlen(obj.chosen_ingr[i])+1];
-        strcpy(chosen_ingr[i], obj.chosen_ingr[i]);
-        price[i] =obj.price[i];}
+    for (int i=0; i<ingr_number;i++)
+        delete[] chosen_ingr[i];
+    this->cost=obj.cost;
+    this->budget=obj.budget;
+    this->ingr_number=obj.ingr_number;
+    for(int i=0;i<=ingr_number;i++)
+    {chosen_ingr[i]=new char[strlen(obj.chosen_ingr[i])+1];
+    strcpy(chosen_ingr[i], obj.chosen_ingr[i]);
+    price[i] =obj.price[i];}
 
 }
 ingredients::ingredients(const ingredients& obj):initial_budg(obj.initial_budg)
