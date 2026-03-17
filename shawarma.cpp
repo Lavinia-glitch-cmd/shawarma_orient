@@ -410,6 +410,21 @@ int main()
             //std::cout<<"introduce yourself: ";
             std::cin>>utilizator;
             break;
+        case 4:
+            int shop_choice;
+            std::cout<<"\n available shops: \n";
+            for (int i=1;i<=3; i++)
+            {
+                std::cout<<i; std::cout<<stores[i]<<endl;
+            }
+            if(shop_choice>=1 && shop_choice<=3)
+            {
+                actual_shop=&stores[shop_choice-1];
+                std::cout<<"Welcome!!";
+
+            }
+            else std::cout<<"Invalid number!!";
+            break;
     }
     }while(option!=0);
 }
