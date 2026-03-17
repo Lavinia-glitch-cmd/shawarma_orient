@@ -490,7 +490,7 @@ int main()
                     std::cout << "!!! your cart is empty !!!\n";}
             else 
             {
-                receipt receipt(utilizator.getname(), chart.gettotal()); //fix here
+                receipt receipt(utilizator.getname(), utilizator.getchart().gettotal()); //fix here
                 receipt.print_receipt(utilizator, *actual_shop);
             }
     }
