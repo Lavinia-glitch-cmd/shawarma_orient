@@ -449,6 +449,7 @@ int main()
     std::cout<<"2. show ingredients\n";
     std::cout<<"3. introduce yourself\n";
     std::cout<<"4. select/switch shop\n";
+    std::cout<<"5. buy\n";
     std::cout<<"0. exit\n";
 
     std::cin>>option;
@@ -480,6 +481,19 @@ int main()
             }
             else std::cout<<"Invalid number!!";
             break;
+        case 5:
+            if (actual_shop == nullptr) {
+                std::cout << "!!! Error: please select a shop first !!!\n";
+    } 
+            else 
+                {if (utilizator.getchart().gettotal() == 0) {
+                    std::cout << "!!! your cart is empty !!!\n";}
+            else 
+            {
+                receipt receipt(utilizator.getname(), chart.gettotal()); //fix here
+                receipt.print_receipt(utilizator, *actual_shop);
+            }
+    }
     }
     }while(option!=0);
 }
