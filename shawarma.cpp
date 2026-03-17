@@ -402,6 +402,18 @@ class receipt
         }
         return *this;
     }
+
+    void print_receipt(const client& c, const shop& s) const {
+        std::cout << "\n==================================\n";
+        std::cout << "         RECEIPT                    \n";
+        std::cout << "==================================\n";
+        std::cout << "ID: " << receipt_no << "\n";
+        std::cout << "Shop: " << s << "\n"; // Folosește operatorul << de la Shop
+        std::cout << "Customer: " << c.getname() << "\n";
+        std::cout << "----------------------------------\n";
+        std::cout << "TOTAL PAID: " << paid_amount << " RON\n";
+        std::cout << "==================================\n";
+    }
 };
 int receipt::total_receipts=0;
 
