@@ -33,7 +33,7 @@ class ingredients
         }
         void setbudget(float b)
         {
-            budget=b;
+            budget=b; std::cout<<"m ia setat bugetul"<<budget;
         }
 
         std::ostream& afisare(std::ostream& out) const;
@@ -122,7 +122,7 @@ void ingredients::add_ingr_in_list(const char *name, float price)
     if(ingr_number>20)
         std::cout<<"too many ingredients";
     else 
-        if (cost+price > initial_budg)
+        if (cost+price > budget)
             {
                 std::cout<<"over budget!\n";
             std::cout<<"you have "<<budget<<" left";
@@ -286,8 +286,7 @@ class shop
         {
             if(this == &obj)
                 return *this;
-            else 
-            {
+            
                 delete[] address;
                 this->address=new char[strlen(obj.address)+1];
             strcpy(this->address, obj.address);
@@ -295,8 +294,8 @@ class shop
             this->turnover=obj.turnover;
             this->staff_no=obj.staff_no;
             this->open=obj.open;
-            }
-
+            return *this;
+            
         }
         std::ostream& shop_afis(std::ostream& out) const {
         out << "Shop Address: " << address << "\n Turnover: " << turnover << " \n Open: " << (open ? "Is open" : "Nope");
@@ -404,11 +403,9 @@ class receipt
     }
 
     void print_receipt(const client& c, const shop& s) const {
-        std::cout << "\n==================================\n";
         std::cout << "         RECEIPT                    \n";
-        std::cout << "==================================\n";
         std::cout << "ID: " << receipt_no << "\n";
-        std::cout << "Shop: " << s << "\n"; // Folosește operatorul << de la Shop
+        std::cout << "Shop: " << s << "\n"; 
         std::cout << "Customer: " << c.getname() << "\n";
         std::cout << "----------------------------------\n";
         std::cout << "TOTAL PAID: " << paid_amount << " RON\n";
@@ -417,84 +414,108 @@ class receipt
 };
 int receipt::total_receipts=0;
 
-int main()
-{
-    int option;
-    float budget;
-    std::cout<<"set you initial budgt: ";
-    std::cin>>budget;
-    //ingredients my_ingredients(budget);
+class Kebabapp {
+private:
+    float initial_budget;
+    shop stores[3];
+    shop* actual_shop;
+    client utilizator;
 
-    shop stores[3] = {
-        shop("street nr. 5", 120000, 4, true),
-        shop("street no. 4", 300000, 10, true),
-        shop("street no. 3", 80000, 2, false)
-    };
-    shop * actual_shop=nullptr;
-
-    client utilizator("Not known", 0, budget);
-    utilizator.getchart().setbudget(budget);
-    do
+public:
+    Kebabapp() : initial_budget(0), actual_shop(nullptr),  utilizator("Not known", 0, 0) 
     {
-        std::cout<<"\n KEBAB SIMULATOR \n";
-        if(actual_shop != nullptr) 
-        {
-            std::cout<<"Location: "<< *actual_shop<<"\n";
+        stores[0] = shop("street nr. 5", 120000, 4, true);
+        stores[1] = shop("street no. 4", 300000, 10, true);
+        stores[2] = shop("street no. 3", 80000, 2, false);}
 
-        }
-        else{
-            std::cout<<"Choose first a location\n";
-        }
-    std::cout<<"\n== choose from the following ==\n";
-    std::cout<<"1. add ingredient\n";
-    std::cout<<"2. show ingredients\n";
-    std::cout<<"3. introduce yourself\n";
-    std::cout<<"4. select/switch shop\n";
-    std::cout<<"5. buy\n";
-    std::cout<<"0. exit\n";
-
-    std::cin>>option;
-    switch(option)
-    {
-        case 1:
-            utilizator.getchart().open_menu();
-            break;
-        case 2:
-            utilizator.getchart().show_ingr();
-            break;
-        case 3:
-            //std::cout<<"introduce yourself: ";
-            std::cin>>utilizator;
-            break;
-        case 4:
-            int shop_choice;
-            std::cout<<"\n available shops: \n";
-            for (int i=0;i<=2; i++)
-            {
-                std::cout<<i+1<<" "; std::cout<<stores[i]<<std::endl;
-            }
-            std::cin>>shop_choice;
-            if(shop_choice>=1 && shop_choice<=3)
-            {
-                actual_shop=&stores[shop_choice-1];
-                std::cout<<"Welcome!!";
-
-            }
-            else std::cout<<"Invalid number!!";
-            break;
-        case 5:
-            if (actual_shop == nullptr) {
-                std::cout << "!!! Error: please select a shop first !!!\n";
-    } 
-            else 
-                {if (utilizator.getchart().gettotal() == 0) {
-                    std::cout << "!!! your cart is empty !!!\n";}
-            else 
-            {
-                receipt r(utilizator.getname(), (float)utilizator.getchart().gettotal()); 
-                r.print_receipt(utilizator, *actual_shop);
-            }
+    void start() {
+        std::cout << "Set your initial budget: ";
+        std::cin >> initial_budget;
+        utilizator.getchart().setbudget(initial_budget);
+        
+        run_main_loop();
     }
+
+private:
+    void run_main_loop() {
+        int option;
+        display_status();
+        do {
+            
+            display_options();
+            std::cin >> option;
+            handle_option(option);
+        } while (option != 0);
     }
-    }while(option!=0);
+
+    void display_status() {
+        std::cout << "\n KEBAB SIMULATOR \n";
+        if (actual_shop != nullptr) {
+            std::cout << "Location: " << *actual_shop << "\n";
+        } else {
+            std::cout << "Choose first a location\n";
+        }
+    }
+
+    void display_options() {
+        std::cout << "\n== choose from the following ==\n";
+        std::cout << "1. add ingredient\n";
+        std::cout << "2. show ingredients\n";
+        std::cout << "3. introduce yourself\n";
+        std::cout << "4. select/switch shop\n";
+        std::cout << "5. buy\n";
+        std::cout << "0. exit\n";
+        std::cout << "Option: ";
+    }
+
+    void handle_option(int option) {
+        switch (option) {
+            case 1:
+                utilizator.getchart().open_menu();
+                break;
+            case 2:
+                utilizator.getchart().show_ingr();
+                break;
+            case 3:
+                std::cin >> utilizator;
+                break;
+            case 4:
+                choose_shop();
+                break;
+            case 5:
+                process_purchase();
+                break;
+        }
+    }
+
+    void choose_shop() {
+        int shop_choice;
+        std::cout << "\n Available shops: \n";
+        for (int i=0; i< 3; i++) {
+            std::cout <<i+1 <<" " << stores[i] << std::endl;
+        }
+        std::cin >> shop_choice;
+        if (shop_choice >= 1 && shop_choice <= 3) {
+            actual_shop =&stores[shop_choice- 1];
+            std::cout <<"Welcome!!";
+        } else {std::cout <<"Invalid number!!";}
+    }
+
+    void process_purchase() {
+        if (actual_shop == nullptr) {
+            std::cout << "!!! Error: please select a shop first !!!\n";
+        } else if (utilizator.getchart().gettotal() == 0) {
+            std::cout << "!!! your cart is empty !!!\n";
+        } else {
+            receipt r(utilizator.getname(), (float)utilizator.getchart().gettotal());
+            r.print_receipt(utilizator, *actual_shop);
+        }
+    }
+};
+
+
+int main() {
+    Kebabapp simulator;
+    simulator.start();
+    return 0;
 }
