@@ -270,7 +270,19 @@ class shop
             delete[] address;
 
         }
-        
+        shop(const shop& obj)
+        {
+            this->address=new char[strlen(obj.address)+1];
+            strcpy(this->address, obj.address);
+
+            this->turnover=obj.turnover;
+            this->staff_no=obj.staff_no;
+            this->open=obj.open;
+
+
+        }
+
+
 };
 
 int client::no_clients=0;
