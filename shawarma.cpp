@@ -433,6 +433,7 @@ int main()
     shop * actual_shop=nullptr;
 
     client utilizator;
+    utilizator.getchart().setbudget(budget);
     do
     {
         std::cout<<"\n KEBAB SIMULATOR \n";
@@ -490,8 +491,8 @@ int main()
                     std::cout << "!!! your cart is empty !!!\n";}
             else 
             {
-                receipt receipt(utilizator.getname(), utilizator.getchart().gettotal()); 
-                receipt.print_receipt(utilizator, *actual_shop);
+                receipt r(utilizator.getname(), (float)utilizator.getchart().gettotal()); 
+                r.print_receipt(utilizator, *actual_shop);
             }
     }
     }
