@@ -310,6 +310,8 @@ std::ostream& operator<<(std::ostream& out, const shop& s)
     return s.shop_afis(out);
 }
 
+
+
 int client::no_clients=0;
 std::ostream& client::afisare_client(std::ostream& out) const{
     out<<"client name: "<<name<<"----age: "<<age;
@@ -369,13 +371,30 @@ int main()
     std::cin>>budget;
     //ingredients my_ingredients(budget);
 
+    shop stores[3] = {
+        shop("street nr. 5", 120000, 4, true),
+        shop("street no. 4", 300000, 10, true),
+        shop("street no. 3", 80000, 2, false)
+    };
+    shop * actual_shop=nullptr;
+
     client utilizator;
     do
     {
+        std::cout<<"\n KEBAB SIMULATOR \n";
+        if(actual_shop != nullptr) 
+        {
+            std::cout<<"Location: "<< *actual_shop<<"\n";
+
+        }
+        else{
+            std::cout<<"Choose first a location\n";
+        }
     std::cout<<"\n== choose from the following ==\n";
     std::cout<<"1. add ingredient\n";
     std::cout<<"2. show ingredients\n";
     std::cout<<"3. introduce yourself\n";
+    std::cout<<"4. select/switch shop\n";
     std::cout<<"0. exit\n";
 
     std::cin>>option;
