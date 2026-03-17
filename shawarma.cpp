@@ -383,7 +383,12 @@ class receipt
     {
         delete[] receipt_no;
     }
-    
+    receipt(const receipt& obj)
+    {
+        this->receipt_no=new char[strlen(obj.receipt_no)+1];
+        strcpy(this->receipt_no, obj.receipt_no);
+        this->paid_amount = obj.paid_amount;
+    }
 };
 
 int main()
