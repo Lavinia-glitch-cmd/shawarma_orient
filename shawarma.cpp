@@ -363,6 +363,9 @@ client::client(const char* name, int v): age(v)
     strcpy(this->name, name);
     no_clients++;
 }
+
+
+
 int main()
 {
     int option;
@@ -415,7 +418,7 @@ int main()
             std::cout<<"\n available shops: \n";
             for (int i=1;i<=3; i++)
             {
-                std::cout<<i; std::cout<<stores[i]<<endl;
+                std::cout<<i; std::cout<<stores[i]<<std::endl;
             }
             if(shop_choice>=1 && shop_choice<=3)
             {
