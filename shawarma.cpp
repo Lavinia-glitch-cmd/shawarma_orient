@@ -364,7 +364,23 @@ client::client(const char* name, int v): age(v)
     no_clients++;
 }
 
+class receipt
+{
+    private:
+    char* receipt_no;
+    float paid_amount;
+    
+    static int total_receipts;
 
+    public:
+    receipt(const char* id, float amount):paid_amount(amount)
+    {
+        receipt_no = new char[strlen(id)+1];
+        strcpy(this->receipt_no, id);
+        total_receipts++;
+    }
+
+};
 
 int main()
 {
@@ -418,8 +434,9 @@ int main()
             std::cout<<"\n available shops: \n";
             for (int i=0;i<=2; i++)
             {
-                std::cout<<i; std::cout<<stores[i]<<std::endl;
+                std::cout<<i+1<<" "; std::cout<<stores[i]<<std::endl;
             }
+            std::cin>>shop_choice;
             if(shop_choice>=1 && shop_choice<=3)
             {
                 actual_shop=&stores[shop_choice-1];
