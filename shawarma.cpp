@@ -389,7 +389,21 @@ class receipt
         strcpy(this->receipt_no, obj.receipt_no);
         this->paid_amount = obj.paid_amount;
     }
+
+    receipt& operator=(const receipt& obj)
+    {
+        if (this != &obj) {
+            
+            delete[] receipt_no;
+            receipt_no = new char[strlen(obj.receipt_no) + 1];
+            strcpy(receipt_no, obj.receipt_no);
+
+            paid_amount = obj.paid_amount;
+        }
+        return *this;
+    }
 };
+
 
 int main()
 {
