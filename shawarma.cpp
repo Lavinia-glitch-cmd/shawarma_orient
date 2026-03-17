@@ -282,6 +282,23 @@ class shop
 
         }
 
+        shop& operator=(const shop& obj)
+        {
+            if(this == &obj)
+                return *this;
+            else 
+            {
+                delete[] address;
+                this->address=new char[strlen(obj.address)+1];
+            strcpy(this->address, obj.address);
+
+            this->turnover=obj.turnover;
+            this->staff_no=obj.staff_no;
+            this->open=obj.open;
+            }
+        }
+
+
 
 };
 
