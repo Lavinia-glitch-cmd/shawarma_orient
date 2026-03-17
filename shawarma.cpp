@@ -341,7 +341,7 @@ client& client::operator=(const client & obj)
         delete[] name;
         this->name=new char[strlen(obj.name)+1];
         this->age=obj.age;
-        strcpy(this->name, name);
+        strcpy(this->name, obj.name);
 
     }
     return *this;
@@ -490,7 +490,7 @@ int main()
                     std::cout << "!!! your cart is empty !!!\n";}
             else 
             {
-                receipt receipt(utilizator.getname(), utilizator.getchart().gettotal()); //fix here
+                receipt receipt(utilizator.getname(), utilizator.getchart().gettotal()); 
                 receipt.print_receipt(utilizator, *actual_shop);
             }
     }
