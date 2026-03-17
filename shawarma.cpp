@@ -69,7 +69,7 @@ ingredients::ingredients(const ingredients& obj):initial_budg(obj.initial_budg)
     this->cost=obj.cost;
     this->budget=obj.budget;
     this->ingr_number=obj.ingr_number;
-    for(int i=0;i<=ingr_number;i++)
+    for(int i=0;i<ingr_number;i++)
         {chosen_ingr[i]=new char[strlen(obj.chosen_ingr[i])+1];
         strcpy(chosen_ingr[i], obj.chosen_ingr[i]);
         price[i] =obj.price[i];}
