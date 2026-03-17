@@ -393,7 +393,7 @@ class receipt
     receipt& operator=(const receipt& obj)
     {
         if (this != &obj) {
-            
+
             delete[] receipt_no;
             receipt_no = new char[strlen(obj.receipt_no) + 1];
             strcpy(receipt_no, obj.receipt_no);
@@ -403,7 +403,7 @@ class receipt
         return *this;
     }
 };
-
+int receipt::total_receipts=0;
 
 int main()
 {
