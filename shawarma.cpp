@@ -210,7 +210,7 @@ class client
         ingredients chart;
 
     public:
-        explicit client( const char* name="Not known", int v=0);
+        explicit client( const char*, int , float);
 
         client(const client& obj);
         ~client();
@@ -357,7 +357,7 @@ client::client(const client& obj)
     strcpy(this->name, obj.name);
 
 }
-client::client(const char* name, int v): age(v)
+client::client(const char* name, int v, float b): age(v), chart(b)
 {
     this->name= new char[strlen(name)+1];
     strcpy(this->name, name);
@@ -432,7 +432,7 @@ int main()
     };
     shop * actual_shop=nullptr;
 
-    client utilizator;
+    client utilizator("Not known", 0, budget);
     utilizator.getchart().setbudget(budget);
     do
     {
