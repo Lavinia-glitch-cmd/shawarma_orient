@@ -354,7 +354,7 @@ client::client(const client& obj)
 {
     this->name= new char[strlen(obj.name) +1];
     this->age=obj.age;
-    strcpy(this->name, name);
+    strcpy(this->name, obj.name);
 
 }
 client::client(const char* name, int v): age(v)
