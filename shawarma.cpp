@@ -416,7 +416,7 @@ int main()
         case 4:
             int shop_choice;
             std::cout<<"\n available shops: \n";
-            for (int i=1;i<=3; i++)
+            for (int i=0;i<=2; i++)
             {
                 std::cout<<i; std::cout<<stores[i]<<std::endl;
             }
