@@ -245,6 +245,34 @@ class client
         std::ostream& afisare_client(std::ostream& out) const;
         //std::istream& citire_client(std::istream& in, client& obj);
 };
+
+class shop
+{
+    private:
+        char* address;
+        long turnover;
+        int staff_no;
+        bool open;
+
+    public:
+        shop():turnover(5000), staff_no(5), open(true)
+        {
+            address = new char[strlen("Main street no,1 ") +1];
+            strcpy(address, "Main street no,1 ");
+        } 
+        explicit shop(const char* address, long turn, int staff, bool open):turnover(turn), staff_no(staff), open(open)
+        {
+            this->address=new char[strlen(address) +1];
+            strcpy(this->address, address);
+        }
+        ~shop()
+        {
+            delete[] address;
+
+        }
+        
+};
+
 int client::no_clients=0;
 std::ostream& client::afisare_client(std::ostream& out) const{
     out<<"client name: "<<name<<"----age: "<<age;
