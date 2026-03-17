@@ -379,7 +379,11 @@ class receipt
         strcpy(this->receipt_no, id);
         total_receipts++;
     }
-
+    ~receipt()
+    {
+        delete[] receipt_no;
+    }
+    
 };
 
 int main()
