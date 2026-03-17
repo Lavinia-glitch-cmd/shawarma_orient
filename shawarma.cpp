@@ -296,11 +296,19 @@ class shop
             this->staff_no=obj.staff_no;
             this->open=obj.open;
             }
+
         }
+        std::ostream& shop_afis(std::ostream& out) const {
+        out << "Shop Address: " << address << "\n Turnover: " << turnover << " \n Open: " << (open ? "Is open" : "Nope");
+        return out;}
 
-
+        
 
 };
+std::ostream& operator<<(std::ostream& out, const shop& s)
+{
+    return s.shop_afis(out);
+}
 
 int client::no_clients=0;
 std::ostream& client::afisare_client(std::ostream& out) const{
