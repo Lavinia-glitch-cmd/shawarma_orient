@@ -357,7 +357,7 @@ Client::Client(const Client& obj)
     strcpy(this->name, obj.name);
 
 }
-Client::Client(const char* name, int v, float b): age(v), chart(b)
+Client::Client(const char* name, int v, float b): age(v), chart(b), name(nullptr)
 {
     this->name= new char[strlen(name)+1];
     strcpy(this->name, name);
