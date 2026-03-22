@@ -214,7 +214,11 @@ class Client
 
     public:
         explicit Client( const char*, int , float);
+        Client(){
+            name =nullptr;
+            age=0;
 
+        }
         Client(const Client& obj);
         ~Client();
         Client& operator=(const Client& obj);
