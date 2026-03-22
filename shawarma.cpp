@@ -51,14 +51,20 @@ Ingredients& Ingredients::operator=(const Ingredients& obj)
         return *this;
     
     for (int i=0; i<ingr_number;i++)
-        delete[] chosen_ingr[i];
+        if (chosen_ingr[i] != nullptr) {
+            delete[] chosen_ingr[i];
+            chosen_ingr[i] = nullptr;
+        }
+
     this->cost=obj.cost;
     this->budget=obj.budget;
     this->ingr_number=obj.ingr_number;
-    for(int i=0;i<=ingr_number;i++)
-    {chosen_ingr[i]=new char[strlen(obj.chosen_ingr[i])+1];
+    for(int i=0;i<obj.ingr_number;i++)
+        {
+            chosen_ingr[i]=new char[strlen(obj.chosen_ingr[i])+1];
     strcpy(chosen_ingr[i], obj.chosen_ingr[i]);
-    price[i] =obj.price[i];}
+    this->price[i] =obj.price[i];
+        }
 
     return *this;
 }
