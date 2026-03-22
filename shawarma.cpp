@@ -354,9 +354,12 @@ Client::Client(const Client& obj)
 {
     this->age=obj.age;
     (*this).chart=obj.chart;
+
+    if(obj.name != nullptr){
     this->name= new char[strlen(obj.name) +1];
-    
     strcpy(this->name, obj.name);
+    }
+    else (*this).name= nullptr;
 
 }
 Client::Client(const char* name, int v, float b): age(v), chart(b), name(nullptr)
