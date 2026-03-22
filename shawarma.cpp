@@ -352,8 +352,10 @@ Client::~Client()
 }
 Client::Client(const Client& obj)
 {
-    this->name= new char[strlen(obj.name) +1];
     this->age=obj.age;
+    (*this).chart=obj.chart;
+    this->name= new char[strlen(obj.name) +1];
+    
     strcpy(this->name, obj.name);
 
 }
