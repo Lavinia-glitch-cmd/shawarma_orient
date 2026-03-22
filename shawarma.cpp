@@ -104,7 +104,7 @@ void Ingredients::operator+=(const char* ingr)
 // }
 Ingredients::~Ingredients()
 {
-    for (int i=0; i<ingr_number; i++)
+    for (int i=0; i<20; i++)
         delete[] chosen_ingr[i];
 }
 Ingredients::Ingredients() : cost(0), initial_budg(0)
@@ -222,6 +222,11 @@ class Client
         Client(const Client& obj);
         ~Client();
         Client& operator=(const Client& obj);
+
+        static int getnoClients()
+        {
+            return no_Clients;
+        }
 
         const char* getname() const 
         {
