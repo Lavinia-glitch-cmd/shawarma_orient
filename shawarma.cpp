@@ -1,8 +1,6 @@
 #include <iostream>
 #include <cstring>
-
-
-class ingredients
+class Ingredients
 {
     private:
         char* chosen_ingr[20]; 
@@ -16,13 +14,13 @@ class ingredients
         void add_ingr_in_list(const char*, float);
         void show_ingr();
         void operator+=(const char*);
-        ingredients();
-        explicit ingredients(float);
-        ingredients(const ingredients& obj);
-        ingredients& operator=(const ingredients& obj);
+        Ingredients();
+        explicit Ingredients(float);
+        Ingredients(const Ingredients& obj);
+        Ingredients& operator=(const Ingredients& obj);
 
         //ingredients(float, float);
-        ~ingredients();
+        ~Ingredients();
 
         double gettotal() const {
             return cost;
@@ -38,16 +36,16 @@ class ingredients
 
         std::ostream& afisare(std::ostream& out) const;
 };
-std::ostream& operator<<(std::ostream& out, const ingredients& i) {
+std::ostream& operator<<(std::ostream& out, const Ingredients& i) {
     i.afisare(out);
     return out;
 }
-std::ostream& ingredients::afisare(std::ostream& out) const
+std::ostream& Ingredients::afisare(std::ostream& out) const
 {
     out<< "Ingredients in the list: "<<ingr_number<<"total cost: "<<cost;
     return out;
 }
-ingredients& ingredients::operator=(const ingredients& obj)
+Ingredients& Ingredients::operator=(const Ingredients& obj)
 {
     if (this== &obj)
         return *this;
@@ -64,7 +62,7 @@ ingredients& ingredients::operator=(const ingredients& obj)
 
     return *this;
 }
-ingredients::ingredients(const ingredients& obj):initial_budg(obj.initial_budg)
+Ingredients::Ingredients(const Ingredients& obj):initial_budg(obj.initial_budg)
 {
     this->cost=obj.cost;
     this->budget=obj.budget;
@@ -75,7 +73,7 @@ ingredients::ingredients(const ingredients& obj):initial_budg(obj.initial_budg)
         price[i] =obj.price[i];}
 
 }
-void ingredients::operator+=(const char* ingr)
+void Ingredients::operator+=(const char* ingr)
 {
     float p=0.0;
     std::string name(ingr);
@@ -94,22 +92,22 @@ void ingredients::operator+=(const char* ingr)
     add_ingr_in_list(ingr, p);
 
 }
-// ingredients::ingredients(float budget, float price)
+// Ingredients::Ingredients(float budget, float price)
 // {   
 //     budget-=price;
 // }
-ingredients::~ingredients()
+Ingredients::~Ingredients()
 {
     for (int i=0; i<ingr_number; i++)
         delete[] chosen_ingr[i];
 }
-ingredients::ingredients() : cost(0), initial_budg(0)
+Ingredients::Ingredients() : cost(0), initial_budg(0)
 {
     ingr_number=0;
     for (int i=0;i<20;++i)
         chosen_ingr[i]=nullptr;
 }
-ingredients::ingredients(float b) : initial_budg(b)
+Ingredients::Ingredients(float b) : initial_budg(b)
 {
     cost=0;
     ingr_number=0;
@@ -117,10 +115,10 @@ ingredients::ingredients(float b) : initial_budg(b)
         chosen_ingr[i] = nullptr;
     budget=b;
 }
-void ingredients::add_ingr_in_list(const char *name, float price)
+void Ingredients::add_ingr_in_list(const char *name, float price)
 {
     if(ingr_number>20)
-        std::cout<<"too many ingredients";
+        std::cout<<"too many Ingredients";
     else 
         if (cost+price > budget)
             {
@@ -139,13 +137,13 @@ void ingredients::add_ingr_in_list(const char *name, float price)
         
     }
 }
-void ingredients::show_ingr()
+void Ingredients::show_ingr()
 {
     if(ingr_number==0) 
         std::cout<<"you did not chose any ingredient \n";
     else 
     {
-        std::cout<<"\n---your ingredients:\n";
+        std::cout<<"\n---your Ingredients:\n";
         for(int i=0;i<ingr_number;i++)
             std::cout<<"---"<<chosen_ingr[i]<<"----"<<price[i]<<"ron"<<"\n";
         
@@ -156,7 +154,7 @@ void ingredients::show_ingr()
         
     }
 }
-void ingredients::open_menu()
+void Ingredients::open_menu()
 {
     int suboption=-1;
     while(suboption!=0)
@@ -199,22 +197,21 @@ void ingredients::open_menu()
     }*/
 }
 
-
-class client
+class Client
 {
     private:
         char* name;
         int age;
         //double bonus;
-        static int no_clients;
-        ingredients chart;
+        static int no_Clients;
+        Ingredients chart;
 
     public:
-        explicit client( const char*, int , float);
+        explicit Client( const char*, int , float);
 
-        client(const client& obj);
-        ~client();
-        client& operator=(const client& obj);
+        Client(const Client& obj);
+        ~Client();
+        Client& operator=(const Client& obj);
 
         const char* getname() const 
         {
@@ -237,16 +234,16 @@ class client
             this->name=new char[strlen(n)+1];
             strcpy(this->name, n);
         }
-        ingredients& getchart()
+        Ingredients& getchart()
         {
             return chart;
         }
 
-        std::ostream& afisare_client(std::ostream& out) const;
-        //std::istream& citire_client(std::istream& in, client& obj);
+        std::ostream& afisare_Client(std::ostream& out) const;
+        //std::istream& citire_Client(std::istream& in, Client& obj);
 };
 
-class shop
+class Shop
 {
     private:
         char* address;
@@ -255,22 +252,22 @@ class shop
         bool open;
 
     public:
-        shop():turnover(5000), staff_no(5), open(true)
+        Shop():turnover(5000), staff_no(5), open(true)
         {
             address = new char[strlen("Main street no,1 ") +1];
             strcpy(address, "Main street no,1 ");
         } 
-        explicit shop(const char* address, long turn, int staff, bool open):turnover(turn), staff_no(staff), open(open)
+        explicit Shop(const char* address, long turn, int staff, bool open):turnover(turn), staff_no(staff), open(open)
         {
             this->address=new char[strlen(address) +1];
             strcpy(this->address, address);
         }
-        ~shop()
+        ~Shop()
         {
             delete[] address;
 
         }
-        shop(const shop& obj)
+        Shop(const Shop& obj)
         {
             this->address=new char[strlen(obj.address)+1];
             strcpy(this->address, obj.address);
@@ -282,7 +279,7 @@ class shop
 
         }
 
-        shop& operator=(const shop& obj)
+        Shop& operator=(const Shop& obj)
         {
             if(this == &obj)
                 return *this;
@@ -297,30 +294,28 @@ class shop
             return *this;
             
         }
-        std::ostream& shop_afis(std::ostream& out) const {
+        std::ostream& Shop_afis(std::ostream& out) const {
         out << "Shop Address: " << address << "\n Turnover: " << turnover << " \n Open: " << (open ? "Is open" : "Nope");
         return out;}
 
         
 
 };
-std::ostream& operator<<(std::ostream& out, const shop& s)
+std::ostream& operator<<(std::ostream& out, const Shop& s)
 {
-    return s.shop_afis(out);
+    return s.Shop_afis(out);
 }
 
-
-
-int client::no_clients=0;
-std::ostream& client::afisare_client(std::ostream& out) const{
-    out<<"client name: "<<name<<"----age: "<<age;
+int Client::no_Clients=0;
+std::ostream& Client::afisare_Client(std::ostream& out) const{
+    out<<"Client name: "<<name<<"----age: "<<age;
     return out;
 }
-std::ostream& operator<<(std::ostream& out, const client& obj)
+std::ostream& operator<<(std::ostream& out, const Client& obj)
 {
-    return obj.afisare_client(out);
+    return obj.afisare_Client(out);
 }
-std::istream& operator>>(std::istream& in, client& obj)
+std::istream& operator>>(std::istream& in, Client& obj)
 {
     char buff[256]; int v;
     in.get();
@@ -333,7 +328,7 @@ std::istream& operator>>(std::istream& in, client& obj)
     obj.setname(buff);
     return in;
 }
-client& client::operator=(const client & obj)
+Client& Client::operator=(const Client & obj)
 {
     if (this!= &obj)
     {
@@ -345,66 +340,64 @@ client& client::operator=(const client & obj)
     }
     return *this;
 }
-client::~client()
+Client::~Client()
 {
     delete[] name;
 }
-client::client(const client& obj)
+Client::Client(const Client& obj)
 {
     this->name= new char[strlen(obj.name) +1];
     this->age=obj.age;
     strcpy(this->name, obj.name);
 
 }
-client::client(const char* name, int v, float b): age(v), chart(b)
+Client::Client(const char* name, int v, float b): age(v), chart(b)
 {
     this->name= new char[strlen(name)+1];
     strcpy(this->name, name);
-    no_clients++;
+    no_Clients++;
 }
 
-class receipt
+class Receipt
 {
     private:
-    char* receipt_no;
+    char* Receipt_no;
     float paid_amount;
     
-    static int total_receipts;
+    static int total_Receipts;
 
     public:
-    receipt(const char* id, float amount):paid_amount(amount)
+    Receipt(const char* id, float amount):paid_amount(amount)
     {
-        receipt_no = new char[strlen(id)+1];
-        strcpy(this->receipt_no, id);
-        total_receipts++;
+        Receipt_no = new char[strlen(id)+1];
+        strcpy(this->Receipt_no, id);
+        total_Receipts++;
     }
-    ~receipt()
+    ~Receipt()
     {
-        delete[] receipt_no;
+        delete[] Receipt_no;
     }
-    receipt(const receipt& obj)
+    Receipt(const Receipt& obj)
     {
-        this->receipt_no=new char[strlen(obj.receipt_no)+1];
-        strcpy(this->receipt_no, obj.receipt_no);
+        this->Receipt_no=new char[strlen(obj.Receipt_no)+1];
+        strcpy(this->Receipt_no, obj.Receipt_no);
         this->paid_amount = obj.paid_amount;
     }
-
-    receipt& operator=(const receipt& obj)
+    Receipt& operator=(const Receipt& obj)
     {
         if (this != &obj) {
 
-            delete[] receipt_no;
-            receipt_no = new char[strlen(obj.receipt_no) + 1];
-            strcpy(receipt_no, obj.receipt_no);
+            delete[] Receipt_no;
+            Receipt_no = new char[strlen(obj.Receipt_no) + 1];
+            strcpy(Receipt_no, obj.Receipt_no);
 
             paid_amount = obj.paid_amount;
         }
         return *this;
     }
-
-    void print_receipt(const client& c, const shop& s) const {
-        std::cout << "         RECEIPT                    \n";
-        std::cout << "ID: " << receipt_no << "\n";
+    void print_Receipt(const Client& c, const Shop& s) const {
+        std::cout << "         Receipt                    \n";
+        std::cout << "ID: " << Receipt_no << "\n";
         std::cout << "Shop: " << s << "\n"; 
         std::cout << "Customer: " << c.getname() << "\n";
         std::cout << "----------------------------------\n";
@@ -412,21 +405,21 @@ class receipt
         std::cout << "==================================\n";
     }
 };
-int receipt::total_receipts=0;
+int Receipt::total_Receipts=0;
 
 class Kebabapp {
 private:
     float initial_budget;
-    shop stores[3];
-    shop* actual_shop;
-    client utilizator;
+    Shop stores[3];
+    Shop* actual_Shop;
+    Client utilizator;
 
 public:
-    Kebabapp() : initial_budget(0), actual_shop(nullptr),  utilizator("Not known", 0, 0) 
+    Kebabapp() : initial_budget(0), actual_Shop(nullptr),  utilizator("Not known", 0, 0) 
     {
-        stores[0] = shop("street nr. 5", 120000, 4, true);
-        stores[1] = shop("street no. 4", 300000, 10, true);
-        stores[2] = shop("street no. 3", 80000, 2, false);}
+        stores[0] = Shop("street nr. 5", 120000, 4, true);
+        stores[1] = Shop("street no. 4", 300000, 10, true);
+        stores[2] = Shop("street no. 3", 80000, 2, false);}
 
     void start() {
         std::cout << "Set your initial budget: ";
@@ -450,8 +443,8 @@ private:
 
     void display_status() {
         std::cout << "\n KEBAB SIMULATOR \n";
-        if (actual_shop != nullptr) {
-            std::cout << "Location: " << *actual_shop << "\n";
+        if (actual_Shop != nullptr) {
+            std::cout << "Location: " << *actual_Shop << "\n";
         } else {
             std::cout << "Choose first a location\n";
         }
@@ -462,7 +455,7 @@ private:
         std::cout << "1. add ingredient\n";
         std::cout << "2. show ingredients\n";
         std::cout << "3. introduce yourself\n";
-        std::cout << "4. select/switch shop\n";
+        std::cout << "4. select/switch Shop\n";
         std::cout << "5. buy\n";
         std::cout << "0. exit\n";
         std::cout << "Option: ";
@@ -480,7 +473,7 @@ private:
                 std::cin >> utilizator;
                 break;
             case 4:
-                choose_shop();
+                choose_Shop();
                 break;
             case 5:
                 process_purchase();
@@ -488,31 +481,30 @@ private:
         }
     }
 
-    void choose_shop() {
-        int shop_choice;
-        std::cout << "\n Available shops: \n";
+    void choose_Shop() {
+        int Shop_choice;
+        std::cout << "\n Available Shops: \n";
         for (int i=0; i< 3; i++) {
             std::cout <<i+1 <<" " << stores[i] << std::endl;
         }
-        std::cin >> shop_choice;
-        if (shop_choice >= 1 && shop_choice <= 3) {
-            actual_shop =&stores[shop_choice- 1];
+        std::cin >> Shop_choice;
+        if (Shop_choice >= 1 && Shop_choice <= 3) {
+            actual_Shop =&stores[Shop_choice- 1];
             std::cout <<"Welcome!!";
         } else {std::cout <<"Invalid number!!";}
     }
 
     void process_purchase() {
-        if (actual_shop == nullptr) {
-            std::cout << "!!! Error: please select a shop first !!!\n";
+        if (actual_Shop == nullptr) {
+            std::cout << "!!! Error: please select a Shop first !!!\n";
         } else if (utilizator.getchart().gettotal() == 0) {
             std::cout << "!!! your cart is empty !!!\n";
         } else {
-            receipt r(utilizator.getname(), (float)utilizator.getchart().gettotal());
-            r.print_receipt(utilizator, *actual_shop);
+            Receipt r(utilizator.getname(), (float)utilizator.getchart().gettotal());
+            r.print_Receipt(utilizator, *actual_Shop);
         }
     }
 };
-
 
 int main() {
     Kebabapp simulator;
