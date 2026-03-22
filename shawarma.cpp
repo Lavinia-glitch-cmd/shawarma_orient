@@ -50,7 +50,7 @@ Ingredients& Ingredients::operator=(const Ingredients& obj)
     if (this== &obj)
         return *this;
     
-    for (int i=0; i<ingr_number;i++)
+    for (int i=0; i<20;i++)
         if (chosen_ingr[i] != nullptr) {
             delete[] chosen_ingr[i];
             chosen_ingr[i] = nullptr;
@@ -343,10 +343,15 @@ Client& Client::operator=(const Client & obj)
     if (this!= &obj)
     {
         delete[] name;
-        this->name=new char[strlen(obj.name)+1];
-        this->age=obj.age;
-        strcpy(this->name, obj.name);
+        name=nullptr;
+        (*this).age=obj.age;
 
+        if(obj.name != nullptr)
+            {
+                this->name=new char[strlen(obj.name)+1];
+        strcpy(this->name, obj.name);
+            }
+        else (*this).name=nullptr;
     }
     return *this;
 }
